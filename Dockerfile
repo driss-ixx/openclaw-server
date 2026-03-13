@@ -1,7 +1,7 @@
 FROM node:24-bookworm-slim
 
-# Installer Python3 + openclaw
-RUN apt-get update && apt-get install -y python3 git --no-install-recommends \
+# Installer Python3 + git + openclaw (git requis par npm)
+RUN apt-get update && apt-get install -y git python3 --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 RUN npm install -g openclaw@latest
