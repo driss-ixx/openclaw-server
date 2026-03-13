@@ -33,4 +33,4 @@ trap cleanup SIGTERM SIGINT
 export NODE_OPTIONS="--max-old-space-size=850"
 
 echo "🤖 Lancement OpenClaw gateway..."
-openclaw gateway run --bind lan --port 18789 --force
+openclaw gateway run --port 18789
