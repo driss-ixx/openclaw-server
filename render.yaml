@@ -11,15 +11,15 @@ services:
         value: /home/node
       - key: TERM
         value: xterm-256color
+      - key: OPENCLAW_DIR
+        value: /home/node/.openclaw
+      - key: SUPABASE_URL
+        value: https://iagsrbmeviwmozauhenk.supabase.co
+      - key: SUPABASE_SERVICE_KEY
+        sync: false  # Coller dans Render dashboard
       - key: OPENCLAW_GATEWAY_TOKEN
-        sync: false  # Set in Render dashboard
+        sync: false  # Voir ~/.openclaw/openclaw.json gateway.auth.token
       - key: GROQ_API_KEY
-        sync: false
-      - key: OPENROUTER_API_KEY
-        sync: false
+        sync: false  # Voir ~/.openclaw/openclaw.json models.providers.groq.apiKey
       - key: ANTHROPIC_API_KEY
         sync: false
-    disk:
-      name: openclaw-data
-      mountPath: /home/node/.openclaw
-      sizeGB: 1
