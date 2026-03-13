@@ -1,8 +1,8 @@
 FROM node:24-bookworm-slim
 
-ARG CACHEBUST=20260313b
+ARG CACHEBUST=20260313c
 # Installer git + Python3 (git requis par npm install -g openclaw)
-RUN echo "cachebust=$CACHEBUST" && apt-get update && apt-get install -y git python3 --no-install-recommends \
+RUN echo "cachebust=$CACHEBUST" && apt-get update && apt-get install -y git openssh-client python3 --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 RUN npm install -g openclaw@latest
