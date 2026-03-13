@@ -30,7 +30,7 @@ cleanup() {
 trap cleanup SIGTERM SIGINT
 
 # Limiter la mémoire Node.js pour le free tier (1GB RAM)
-export NODE_OPTIONS="--max-old-space-size=768"
+export NODE_OPTIONS="--max-old-space-size=850"
 
 echo "🤖 Lancement OpenClaw gateway..."
 openclaw gateway run --bind lan --port 18789 --force
