@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: openclaw-gateway
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /healthz
+    envVars:
+      - key: HOME
+        value: /home/node
+      - key: TERM
+        value: xterm-256color
+      - key: OPENCLAW_GATEWAY_TOKEN
+        sync: false  # Set in Render dashboard
+      - key: GROQ_API_KEY
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+    disk:
+      name: openclaw-data
+      mountPath: /home/node/.openclaw
+      sizeGB: 1
