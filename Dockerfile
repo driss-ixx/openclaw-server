@@ -1,22 +1,12 @@
-FROM node:24-bookworm-slim
+FROM ghcr.io/openclaw/openclaw:latest
 
-ARG CACHEBUST=20260313e
-# Installer git + Python3 (git requis par npm install -g openclaw)
-RUN echo "cachebust=$CACHEBUST" && apt-get update && apt-get install -y git python3 --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
-
-# Forcer HTTPS pour tous les clones git (pas de clé SSH dans le container)
-RUN printf '[url "https://github.com/"]\n\tinsteadOf = ssh://git@github.com/\n\tinsteadOf = git@github.com:\n' > /root/.gitconfig \
-    && npm install -g openclaw@latest
-
-# Copier les scripts
+# Copier les scripts de session sync
 COPY session-sync.py /app/session-sync.py
 COPY start.sh /app/start.sh
 RUN chmod +x /app/start.sh
 
-RUN groupadd -r openclaw && useradd -r -g openclaw -m -d /home/node node
-USER node
-WORKDIR /home/node
+ENV HOME=/home/node
+ENV OPENCLAW_DIR=/home/node/.openclaw
 
 EXPOSE 18789
 
