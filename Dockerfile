@@ -1,11 +1,13 @@
 FROM node:24-bookworm-slim
 
-ARG CACHEBUST=20260313c
+ARG CACHEBUST=20260313d
 # Installer git + Python3 (git requis par npm install -g openclaw)
 RUN echo "cachebust=$CACHEBUST" && apt-get update && apt-get install -y git openssh-client python3 --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
-RUN npm install -g openclaw@latest
+RUN git config --global url."https://github.com/".insteadOf "ssh://git@github.com/" \
+    && git config --global url."https://github.com/".insteadOf "git@github.com:" \
+    && npm install -g openclaw@latest
 
 # Copier les scripts
 COPY session-sync.py /app/session-sync.py
