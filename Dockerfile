@@ -1,6 +1,7 @@
 FROM node:24-bookworm-slim
 
-# Installer Python3 + git + openclaw (git requis par npm)
+ARG CACHEBUST=20260313
+# Installer git + Python3 (git requis par npm install -g openclaw)
 RUN apt-get update && apt-get install -y git python3 --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
